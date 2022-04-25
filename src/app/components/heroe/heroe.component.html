@@ -1,1 +1,74 @@
-<p>heroe works!</p>
+<h1>Heroe<small> (heroe name)</small></h1>
+<hr />
+
+<div class="row">
+  <div class="col text-right">
+    <button routerLink="/heroes" class="btn btn-danger">
+      <i class="fa fa-arrow-left"></i>
+      Return
+    </button>
+  </div>
+</div>
+
+<div class="row animated__fadeIn faster">
+  <div class="col">
+    <form>
+      <div class="form-group">
+        <div class="mb-3">
+          <label>Firebase ID</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Firebase ID"
+            disabled="disabled"
+          />
+          <small class="form-text text-muted"
+            >This field is auto generate</small
+          >
+        </div>
+        <div class="mb-3">
+          <label>Name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Heroe name"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label>Poder</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Poder"
+            required
+          />        
+        </div>
+
+        <div class="form-group">
+            <label>State</label>
+            <br>
+            <button class="btn btn-outline-success w-50" type="button" >
+                <i class="fa fa-smile-wink" ></i>
+                Alive
+            </button>
+
+            <button class="btn btn-outline-danger w-50" type="button" >
+                <i class="fa fa-dizzy" ></i>
+                Dead
+            </button>
+        </div>
+
+        <hr>
+        <div class="form-group text-center" >
+            <button type="submit"
+                    class="btn btn-primary w-25" >
+                <i class="fa fa-save" ></i>
+            Save</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
