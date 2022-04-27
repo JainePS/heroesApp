@@ -3,44 +3,57 @@
 <hr />
 <div class="row">
   <div class="col text-right">
-    <button routerLink="/heroe/new"
-            class="btn btn-primary">
+    <button routerLink="/heroe/new" class="btn btn-primary">
       <i class="fa-solid fa-plus"></i>
       Add
     </button>
   </div>
 </div>
 <h1></h1>
-<table class="table table-dark table-striped">
-  <thead class="thead-dark">
+<table *ngIf="!charging && heroes.length > 0" 
+      class="table table-dark table-striped">
+  <thead class="thead">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <th scope="col">Poder</th>
-      <th scope="col">Vivo</th>
+      <th scope="col">Power</th>
+      <th scope="col">Alive</th>
       <th scope="col">Tools</th>
     </tr>
   </thead>
 
   <tbody class="tbody-light">
-    <tr>
-      <th scope="row-light"></th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr *ngFor="let heroe of heroes; let i = index">
+      <th scope="row-light">{{ i + 1 }}</th>
+      <td>{{ heroe.name }}</td>
+      <td>{{ heroe.power }}</td>
+      <td>
+        <label *ngIf="heroe.alive" class="badge bg-success">Alive</label>
+        <label *ngIf="!heroe.alive" class="badge bg-danger">Dead</label>
+      </td>
+      <td>
+        <button class="btn btn-info mr-1" [routerLink]="['/heroe', heroe.id]">
+          <i class="fa fa-pen"></i>
+        </button>
+        <button class="btn btn-danger mr-1" 
+                (click)="deleteHeroe(heroe,i)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
 
-<div class="alert alert-warning text-center mt-3">
+<div  *ngIf="!charging && heroes.length === 0"
+      class="alert alert-warning text-center mt-3">
   <h4 class="alert-heading">There is no registers</h4>
   <p>
     <i class="fa fa-exclamation fa-2x"></i>
   </p>
 </div>
 
-<div class="alert alert-info text-center mt-3">
+<div *ngIf="charging"
+     class="alert alert-info text-center mt-3 animated__fadeIn faster">
   <h4 class="alert-heading">Charging</h4>
   <p>
     <i class="fa fa-sync-alt fa-spin fa-2x"></i>

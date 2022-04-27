@@ -2,6 +2,7 @@ import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HeroeModel } from '../models/heroe.model';
 import { map } from 'rxjs/operators';
+import { delay } from 'rxjs';
 
 const newLocal = 'id';
 @Injectable({
@@ -26,7 +27,7 @@ export class HeroesService {
 
   }
 
-  actualizeRegister( heroe: HeroeModel ){
+  updateRegister( heroe: HeroeModel ){
 
     const heroeTemp = {
       ...heroe
@@ -34,6 +35,42 @@ export class HeroesService {
     delete heroeTemp.id;
 
     return this.http.put(`${this.url}/heroes/${heroe.id}.json`, heroeTemp)
+  }
+
+  deleteHeroe(id: any){
+    return this.http.delete(`${this.url}/heroes/${id}.json`)
+  }
+
+  getHeroe(id: any){
+    return this.http.get(`${this.url}/heroes/${id}.json`);
+  }
+
+  getHeroes(){
+    return this.http.get(`${this.url}/heroes.json`).
+                pipe(
+                map( this.createArrays),
+                delay(0)
+                );
+  }
+
+  private createArrays(heroesObj: object){
+
+    const heroes: HeroeModel[] = [];
+    console.log(heroesObj);
+
+    if( heroesObj === null ){ return []; }
+
+    Object.keys( heroesObj ).forEach( key =>{ 
+      const heroe = JSON.parse(JSON.stringify(heroesObj[key as keyof Object])) as HeroeModel;
+      heroe.id = key
+
+      heroes.push(heroe)
+    })
+
+    console.log(heroes);
+    
+    
+    return heroes;
   }
 
 

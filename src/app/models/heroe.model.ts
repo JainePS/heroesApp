@@ -7,8 +7,8 @@ export class HeroeModel {
     constructor(){
         this.alive = true;
         this.id = '';
-        this.name = '';
-        this.power = '';
+        this.name = 'abc';
+        this.power = 'abc';
     }
 
 
